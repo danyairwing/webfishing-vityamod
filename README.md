@@ -6,7 +6,6 @@ The goal of this mod is to deliver a mod menu that provides help on stuff you ca
 <p align="center">
   <img src="https://github.com/danyairwing/webfishing-vityamod/blob/main/previews/20250521001143_2.jpg?raw=true" />
 </p>
-[!put an preview image here](!e)
 
 <b><u> !!! NOTE: This mod is unfinished and is under early development (this version is made under a week). Feel free to suggest features, report bugs and problems in the "Issues" tab. </b><br><br></u>
 # Installation 
