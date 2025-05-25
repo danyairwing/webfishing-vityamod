@@ -25,7 +25,7 @@ Q: Can this be specified as hacking menu? <br>
 A: The goal of Vityamod is to provide handy, customizable and fun features. Vityamod is not going to contain features that break the game. <s>(although its possible to break the game in the nastiest ways possible)</s> <br>
 Q: Is forking an option? <br>
 A: If you want to create a similiar but different menu - sure. Just be aware that it is possible to create an "extention" that loads its own classes into Vityamod, in that case forking is unnessesary and could cause problems with updates, etc. <br>
-If you have issues with the mod, bugs, errors, anything - contact me through my discord server - https://discord.com/FmZ98UQW2v.
+If you have issues with the mod, bugs, errors, anything - contact me through my discord server - https://discord.gg/FmZ98UQW2v.
 
 # Development
 You can either use the classes outside the Vityamod container in your own mod, or make your own class. Example:
