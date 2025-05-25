@@ -47,4 +47,4 @@ vitya.utils.join(923990) # will join a lobby... depending on steamID of the lobb
 vitya.utils.rejoin() # will rejoin the current lobby
 
 ```
-A reference about creating your custom classes is explained in detail in example.gd class.
+A reference about creating your custom classes is explained in detail in [example.gd](https://github.com/danyairwing/webfishing-vityamod/blob/main/mods/danyairwing.vityamod/classes/example.gd) class.
