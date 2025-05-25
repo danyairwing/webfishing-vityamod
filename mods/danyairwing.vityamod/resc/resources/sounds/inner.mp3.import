@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/inner.mp3-fb502aff164e07248d7727b007815fef.mp3str"
+
+[deps]
+
+source_file="res://mods/danyairwing.vityamod/resc/resources/sounds/inner.mp3"
+dest_files=[ "res://.import/inner.mp3-fb502aff164e07248d7727b007815fef.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
