@@ -1,0 +1,231 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://mods/danyairwing.vityamod/resc/vitya.tres" type="Theme" id=1]
+[ext_resource path="res://mods/danyairwing.vityamod/resc/resources/sounds/inner.mp3" type="AudioStream" id=2]
+[ext_resource path="res://mods/danyairwing.vityamod/resc/resources/scripts/colorpicker.gd" type="Script" id=3]
+[ext_resource path="res://mods/danyairwing.vityamod/resc/resources/scripts/viewport.gd" type="Script" id=4]
+
+[sub_resource type="ImageTexture" id=1]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 1, 1, 1, 1 )
+
+[node name="Control" type="CanvasLayer"]
+layer = 128
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme = ExtResource( 1 )
+
+[node name="notifications" type="VBoxContainer" parent="Control"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_right = 400.0
+margin_bottom = 422.0
+mouse_filter = 2
+
+[node name="notification" type="Label" parent="Control/notifications"]
+margin_right = 400.0
+margin_bottom = 14.0
+mouse_filter = 0
+text = "[VITYA] no errors have been found."
+percent_visible = 0.0
+
+[node name="Panel" type="Panel" parent="Control/notifications/notification"]
+show_behind_parent = true
+anchor_bottom = 1.0
+
+[node name="statusbar" type="Label" parent="Control"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -426.0
+margin_top = 14.0
+margin_right = 424.0
+margin_bottom = 62.0
+mouse_filter = 0
+theme_type_variation = "status"
+text = "Vityamod v1 | 19.05.2025, 19:17 | 10205$"
+align = 1
+valign = 1
+
+[node name="Panel" type="Panel" parent="Control/statusbar"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="vitya" type="ColorRect" parent="Control"]
+self_modulate = Color( 0, 0, 0, 0.501961 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 137, 218 )
+rect_pivot_offset = Vector2( 960, 0 )
+color = Color( 0, 0, 0, 1 )
+
+[node name="column" type="Button" parent="Control/vitya"]
+visible = false
+use_parent_material = true
+margin_left = -170.0
+margin_top = 162.0
+margin_right = 124.0
+margin_bottom = 214.0
+text = "Coluimn"
+
+[node name="Panel" type="ScrollContainer" parent="Control/vitya/column"]
+self_modulate = Color( 1, 1, 1, 0.564706 )
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 700.0
+size_flags_vertical = 0
+
+[node name="container" type="VBoxContainer" parent="Control/vitya/column/Panel"]
+margin_right = 294.0
+margin_bottom = 700.0
+mouse_filter = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="title" type="Label" parent="Control/vitya/column/Panel/container"]
+margin_right = 284.0
+margin_bottom = 14.0
+mouse_filter = 0
+text = "TEST"
+align = 1
+
+[node name="slider" type="HSlider" parent="Control/vitya/column/Panel/container"]
+margin_top = 18.0
+margin_right = 284.0
+margin_bottom = 34.0
+focus_mode = 0
+max_value = 1.0
+step = 0.01
+
+[node name="button" type="Button" parent="Control/vitya/column/Panel/container"]
+margin_top = 38.0
+margin_right = 284.0
+margin_bottom = 52.0
+focus_mode = 0
+text = "Do"
+
+[node name="itemlist" type="ItemList" parent="Control/vitya/column/Panel/container"]
+margin_top = 56.0
+margin_right = 284.0
+margin_bottom = 176.0
+rect_min_size = Vector2( 0, 120 )
+focus_mode = 0
+
+[node name="check" type="CheckButton" parent="Control/vitya/column/Panel/container"]
+margin_top = 180.0
+margin_right = 284.0
+margin_bottom = 194.0
+focus_mode = 0
+custom_icons/off = SubResource( 1 )
+custom_icons/on_disabled = SubResource( 1 )
+custom_icons/on = SubResource( 1 )
+custom_icons/off_disabled = SubResource( 1 )
+text = "Yo this is crazy"
+
+[node name="viewport" type="ViewportContainer" parent="Control/vitya/column/Panel/container"]
+margin_top = 198.0
+margin_right = 284.0
+margin_bottom = 498.0
+rect_min_size = Vector2( 0, 300 )
+hint_tooltip = "Double-click to reset camera position."
+mouse_default_cursor_shape = 13
+stretch = true
+script = ExtResource( 4 )
+
+[node name="Viewport" type="Viewport" parent="Control/vitya/column/Panel/container/viewport"]
+size = Vector2( 284, 300 )
+own_world = true
+transparent_bg = true
+handle_input_locally = false
+debug_draw = 1
+render_target_update_mode = 0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Control/vitya/column/Panel/container/viewport/Viewport"]
+
+[node name="CameraOffset" type="Spatial" parent="Control/vitya/column/Panel/container/viewport/Viewport"]
+
+[node name="Camera" type="Camera" parent="Control/vitya/column/Panel/container/viewport/Viewport/CameraOffset"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -5 )
+fov = 27.0
+
+[node name="line" type="LineEdit" parent="Control/vitya/column/Panel/container"]
+margin_top = 502.0
+margin_right = 284.0
+margin_bottom = 524.104
+rect_min_size = Vector2( 0, 22.104 )
+mouse_default_cursor_shape = 0
+align = 1
+
+[node name="colorpicker" type="Panel" parent="Control/vitya/column/Panel/container"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_top = 528.0
+margin_right = 284.0
+margin_bottom = 679.687
+rect_min_size = Vector2( 0, 151.687 )
+script = ExtResource( 3 )
+
+[node name="display" type="Panel" parent="Control/vitya/column/Panel/container/colorpicker"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -103.0
+margin_top = -62.687
+margin_right = -10.0
+margin_bottom = -7.687
+custom_styles/panel = SubResource( 2 )
+
+[node name="r" type="HSlider" parent="Control/vitya/column/Panel/container/colorpicker"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 9.0
+margin_top = -147.687
+margin_right = -9.0
+margin_bottom = -131.687
+focus_mode = 0
+max_value = 1.0
+step = 0.01
+
+[node name="g" type="HSlider" parent="Control/vitya/column/Panel/container/colorpicker"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = -120.687
+margin_right = -8.0
+margin_bottom = -104.687
+focus_mode = 0
+max_value = 1.0
+step = 0.01
+
+[node name="b" type="HSlider" parent="Control/vitya/column/Panel/container/colorpicker"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 9.0
+margin_top = -99.687
+margin_right = -9.0
+margin_bottom = -83.687
+focus_mode = 0
+max_value = 1.0
+step = 0.01
+
+[node name="hex" type="LineEdit" parent="Control/vitya/column/Panel/container/colorpicker"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = -63.687
+margin_right = 145.0
+margin_bottom = -6.687
+mouse_default_cursor_shape = 0
+
+[node name="notification" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -0.064
+bus = "SFX"
