@@ -1,6 +1,8 @@
 extends Node
 const config_directory =  "user://vityacfg.cfg" #"mod://vityacfg.cfg"
-const version = "v1.1.0"
+const version = "v1.1.2"
+
+signal popup_choise
 
 var status_bar_update_timer
 var player_api
@@ -8,7 +10,9 @@ var keybinds_api
 var utils
 var ui
 var main_window
+var popup_window
 var statusbar
+var exit_button
 var drag_bars = []
 var mouse_position = Vector2()
 var theme : Theme
@@ -126,6 +130,7 @@ func change_bg(new_color):
 	if new_color.v < 0.5: text_color = Color(1,1,1)
 	
 	set_color_list(["Label", "Button", "ItemList"], "font_color", text_color)
+	set_color_list(["RichTextLabel"], "default_color", text_color)
 	set_color_list(["Button"], "font_color_hover", text_color)
 	set_color_list(["LineEdit"], "font_color", text_color)
 	set_color_list(["Button"], "font_color_focus", text_color)
@@ -164,6 +169,29 @@ func notificate(text, type="default"):
 	tween.start()
 	tween.connect("tween_all_completed", self, "clear_notification_tween", [tween, notification])
 
+func popup_choise_pressed(choise):
+	emit_signal("popup_choise", choise)
+	popup_window.visible = false
+	
+func popup(title, bbtext, choises):
+	popup_window.visible = true
+	var container = popup_window.get_node("container")
+	
+	popup_window.text = title
+	container.get_node("content").bbcode_text = bbtext
+	
+	var choises_container = container.get_node("choises")
+	
+	for ch in choises_container:
+		if ch != examples.choise:
+			ch.queue_free()
+	
+	for choise in choises:
+		var choise_button =  clone(examples.choise, choises_container)
+		choise_button.text = choise
+		choise_button.connect("pressed", self, "popup_choise_pressed", [choise])
+	
+
 func clone(node, parent=null, no_children=false):
 	if not parent: parent = node.get_parent()
 	var cloned = node.duplicate()
@@ -196,6 +224,7 @@ func toggle_ui_visibility():
 	var tw_time = .5
 	
 	var offset_scale = get_viewport().size.y*2
+	exit_button.visible = is_visible
 	if is_visible:
 		# visible
 		
@@ -419,7 +448,9 @@ func load_ui():
 	# examples + presets
 	ui = ui_instance
 	main_window = ui.get_node("Control/vitya")
+	popup_window = ui.get_node("Control/popup")
 	statusbar = ui.get_node("Control/statusbar")
+	exit_button = ui.get_node("Control/exit")
 	notif_sound = ui.get_node("notification")
 	notif_sound.bus = "SFX"
 	theme = ui.get_node("Control").theme
@@ -428,7 +459,12 @@ func load_ui():
 		theme.default_font = font
 	world = load("res://Assets/world_env.tres")
 	
+	popup_window.connect("button_down", self, "add_bar", [popup_window])
+	popup_window.connect("button_up", self, "remove_bar", [popup_window])
+	
 	examples["notification"] = ui.get_node("Control/notifications/notification")
+	examples["choise"] = popup_window.get_node("container/choises/choise")
+	
 	
 	examples["column"] = ui.get_node("Control/vitya/column")
 	examples["slider"] = examples.column.get_node(container_layer).get_node("slider")
@@ -453,8 +489,17 @@ func load_config():
 			var value = saved_array[index]
 			config[index] = value
 	else:
-		notificate("First time loading. Press INSERT to close hud.", "warn")
+		pass
+		#notificate("First time loading. Press INSERT to close hud.", "warn")
+	popup("First launch popup",
+	"""
+	Thanks for downloading Vityamod. We already have 800 downloads! Thank you :>
+	People reported having issues with closing the mod menu. [b] Use INSERT on your keyboard to
+	close the mod [/b] by default: you can set custom keybind in the HUD column.
 	
+	If you have any other issues, join our discord in the same column. [b] Thanks! <3 [/b]
+	
+	""", ["Got it!"])
 func save_config(): 
 	var savedfile = File.new()
 	savedfile.open(config_directory, File.WRITE)
@@ -521,7 +566,7 @@ func _ready():
 	for classname in class_sources:
 		var script_class = class_sources[classname]
 		load_class(classname, script_class)
-		notificate("Class loaded: " + classname)
+		#notificate("Class loaded: " + classname)
 	
 	# status bar timer
 	status_bar_update_timer = Timer.new()
@@ -531,8 +576,10 @@ func _ready():
 	status_bar_update_timer.start()
 	update_statusbar()
 	
+	exit_button.connect("pressed", self, "toggle_ui_visibility")
 	
 	notificate("Vityamod " + version + " loaded")
+	
 	check_version()
 	
 	examples.column.queue_free()
