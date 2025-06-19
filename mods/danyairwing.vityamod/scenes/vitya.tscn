@@ -225,7 +225,67 @@ margin_right = 145.0
 margin_bottom = -6.687
 mouse_default_cursor_shape = 0
 
+[node name="popup" type="Button" parent="Control"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -208.0
+margin_top = -114.0
+margin_right = 202.0
+margin_bottom = -63.0
+text = "TITLEBARRRRR"
+
+[node name="container" type="Panel" parent="Control/popup"]
+show_behind_parent = true
+anchor_right = 1.0
+margin_top = 30.0
+margin_bottom = 301.0
+
+[node name="content" type="RichTextLabel" parent="Control/popup/container"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -97.5
+margin_bottom = 74.5
+bbcode_enabled = true
+bbcode_text = "Thanks for downloading Vityamod. We already have 800 downloads! Thank you :>
+		People reported having issues with closing the mod menu. Use INSERT on your keyboard to
+		close the mod by default: you can set custom keybind in the <b>HUD</b> column.
+		
+		If you have any other issues, join our discord in the same column. Thanks! <3"
+text = "Thanks for downloading Vityamod. We already have 800 downloads! Thank you :>
+		People reported having issues with closing the mod menu. Use INSERT on your keyboard to
+		close the mod by default: you can set custom keybind in the <b>HUD</b> column.
+		
+		If you have any other issues, join our discord in the same column. Thanks! <3"
+
+[node name="choises" type="HFlowContainer" parent="Control/popup/container"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -50.0
+grow_vertical = 0
+custom_constants/hseparation = 8
+
+[node name="choise" type="Button" parent="Control/popup/container/choises"]
+margin_right = 410.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 100, 50 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Ok"
+
+[node name="exit" type="Button" parent="Control"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -70.0
+margin_top = 15.0
+margin_right = -20.0
+margin_bottom = 61.0
+text = "X"
+
 [node name="notification" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 volume_db = -0.064
-bus = "SFX"

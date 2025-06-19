@@ -182,7 +182,7 @@ func popup(title, bbtext, choises):
 	
 	var choises_container = container.get_node("choises")
 	
-	for ch in choises_container:
+	for ch in choises_container.get_children():
 		if ch != examples.choise:
 			ch.queue_free()
 	
@@ -489,17 +489,16 @@ func load_config():
 			var value = saved_array[index]
 			config[index] = value
 	else:
-		pass
-		#notificate("First time loading. Press INSERT to close hud.", "warn")
-	popup("First launch popup",
-	"""
-	Thanks for downloading Vityamod. We already have 800 downloads! Thank you :>
-	People reported having issues with closing the mod menu. [b] Use INSERT on your keyboard to
-	close the mod [/b] by default: you can set custom keybind in the HUD column.
 	
-	If you have any other issues, join our discord in the same column. [b] Thanks! <3 [/b]
-	
-	""", ["Got it!"])
+		popup("First launch popup",
+		"""
+Thanks for downloading Vityamod. We already have 800 downloads! Thank you :>
+
+[b] Use INSERT on your keyboard to close the mod [/b] by default: you can set custom keybinds in the HUD column.
+
+If you have any other issues, join our discord in the same column. [b] Thanks! <3 [/b]
+
+		""", ["Got it!"])
 func save_config(): 
 	var savedfile = File.new()
 	savedfile.open(config_directory, File.WRITE)
